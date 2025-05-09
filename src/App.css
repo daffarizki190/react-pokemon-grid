@@ -1,0 +1,76 @@
+/* src/App.css */
+.App {
+  text-align: center;
+  padding: 20px;
+  background-color: #2f2f2f;
+  color: white;
+}
+
+.pokemon-grid {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  margin-top: 20px;
+  grid-template-columns: repeat(3, 1fr); /* 3 kolom untuk mobile */
+}
+
+.pokemon-card {
+  background-color: #3f3f3f;
+  border-radius: 8px;
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pokemon-image {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.pokemon-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+
+.pokemon-detail {
+  margin-top: 20px;
+  background-color: #444;
+  border-radius: 8px;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.pokemon-detail-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+h1 {
+  color: #fff;
+}
+
+h3 {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* Responsif untuk desktop */
+@media (min-width: 768px) {
+  .pokemon-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 kolom untuk desktop */
+  }
+
+  .pokemon-detail {
+    max-width: 600px;
+  }
+}

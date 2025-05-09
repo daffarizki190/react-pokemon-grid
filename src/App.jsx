@@ -1,0 +1,66 @@
+// src/App.jsx
+import { useState } from 'react';
+import PokemonCard from './components/PokemonCard';
+import usePokemon from './hooks/usePokemon';
+import './App.css';
+
+function App() {
+  // State untuk menyimpan URL Pokémon dan detail yang dipilih
+  const [pokemonUrls, setPokemonUrls] = useState([
+    'https://pokeapi.co/api/v2/pokemon/1/', // Bulbasaur
+    'https://pokeapi.co/api/v2/pokemon/7/', // Squirtle
+  ]);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
+
+  const { pokemonList, loading, error } = usePokemon(pokemonUrls);
+
+  // Handle klik pada Pokémon untuk melihat detail
+  const handlePokemonClick = (pokemon) => {
+    setSelectedPokemon(pokemon);
+  };
+
+  return (
+    <div className="App">
+      <h1>Pokemon App</h1>
+
+      {loading && <p>Loading...</p>}
+      {error && <p>Error loading Pokémon!</p>}
+
+      {/* Grid untuk menampilkan Pokémon */}
+      <div className="pokemon-grid">
+        {pokemonList &&
+          pokemonList.map((pokemon) => (
+            <div key={pokemon.name} onClick={() => handlePokemonClick(pokemon)}>
+              <PokemonCard pokemon={pokemon} />
+            </div>
+          ))}
+      </div>
+
+      {/* Menampilkan detail Pokémon yang dipilih */}
+      {selectedPokemon && (
+        <div className="pokemon-detail">
+          <h2>{selectedPokemon.name} {selectedPokemon.number}</h2>
+          <img
+            src={selectedPokemon.sprite}
+            alt={selectedPokemon.name}
+            className="pokemon-detail-image"
+          />
+          <p>Height: {selectedPokemon.height} decimeters</p>
+          <p>Weight: {selectedPokemon.weight} hectograms</p>
+          <h3>Abilities:</h3>
+          <ul>
+            {selectedPokemon.abilities.map((ability) => (
+              <li key={ability.ability.name}>{ability.ability.name}</li>
+            ))}
+          </ul>
+          <h3>Stats:</h3>
+          <p>Health: {selectedPokemon.health}</p>
+          <p>Attack: {selectedPokemon.attack}</p>
+          <p>Defense: {selectedPokemon.defense}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
