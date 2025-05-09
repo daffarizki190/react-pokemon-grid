@@ -1,20 +1,17 @@
-// src/App.jsx
 import { useState } from 'react';
 import PokemonCard from './components/PokemonCard';
 import usePokemon from './hooks/usePokemon';
 import './App.css';
 
 function App() {
-  // State untuk menyimpan URL Pokémon dan detail yang dipilih
   const [pokemonUrls, setPokemonUrls] = useState([
-    'https://pokeapi.co/api/v2/pokemon/1/', // Bulbasaur
-    'https://pokeapi.co/api/v2/pokemon/7/', // Squirtle
+    'https://pokeapi.co/api/v2/pokemon/1/',
+    'https://pokeapi.co/api/v2/pokemon/7/',
   ]);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   const { pokemonList, loading, error } = usePokemon(pokemonUrls);
 
-  // Handle klik pada Pokémon untuk melihat detail
   const handlePokemonClick = (pokemon) => {
     setSelectedPokemon(pokemon);
   };
@@ -26,7 +23,6 @@ function App() {
       {loading && <p>Loading...</p>}
       {error && <p>Error loading Pokémon!</p>}
 
-      {/* Grid untuk menampilkan Pokémon */}
       <div className="pokemon-grid">
         {pokemonList &&
           pokemonList.map((pokemon) => (
@@ -36,7 +32,6 @@ function App() {
           ))}
       </div>
 
-      {/* Menampilkan detail Pokémon yang dipilih */}
       {selectedPokemon && (
         <div className="pokemon-detail">
           <h2>{selectedPokemon.name} {selectedPokemon.number}</h2>
